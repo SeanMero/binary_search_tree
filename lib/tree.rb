@@ -34,7 +34,7 @@ class Tree
   end
 
   def delete(val, node = root)
-    if node.value == val
+    if val == node.value
       if node.left.nil? && node.right.nil?
         node = nil
       elsif node.left.nil?
@@ -55,5 +55,11 @@ class Tree
     else
       find_left(node.left)
     end
+  end
+
+  def find(val, node = root)
+    return node if node.nil? || val == node.value
+
+    val < node.value ? find(val, node.left) : find(val, node.right)
   end
 end

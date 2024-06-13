@@ -7,4 +7,4 @@ puts a.root
 puts a.root.value
 puts a.root.left.value
 puts a.root.right.value
-a.delete(324)
+puts a.find(325)
