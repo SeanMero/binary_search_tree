@@ -13,10 +13,10 @@ class Tree
     # base case and then recursion
     return Node.new(arr[0]) if arr.length <= 1
 
-    mid = (arr.length - 1) / 2 # rubocop:disable Lint/AmbiguousOperatorPrecedence
+    mid = (arr.length) / 2
 
     root_node = Node.new(arr[mid])
-    root_node.left = build_tree(arr[0..mid])
+    root_node.left = build_tree(arr[0..(mid - 1)])
     root_node.right = build_tree(arr[(mid + 1)..])
 
     # return the root node
@@ -28,8 +28,32 @@ class Tree
       puts "This value is already in the tree."
     elsif val < node.value
       node.left.nil? ? node.left = Node.new(val) : insert(val, node.left)
-    else val > node.value
+    else
       node.right.nil? ? node.right = Node.new(val) : insert(val, node.right)
+    end
+  end
+
+  def delete(val, node = root)
+    if node.value == val
+      if node.left.nil? && node.right.nil?
+        node = nil
+      elsif node.left.nil?
+        node = node.right
+      elsif node.right.nil?
+        node = node.left
+      else
+        node.right.left.nil? ? node = node.right : node = find_left(node)
+      end
+    else
+      val < node.value ? delete(val, node.left) : delete(val, node.right)
+    end
+  end
+
+  def find_left(node)
+    if node.left.nil?
+      return node
+    else
+      find_left(node.left)
     end
   end
 end
