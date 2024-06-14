@@ -62,4 +62,20 @@ class Tree
 
     val < node.value ? find(val, node.left) : find(val, node.right)
   end
+
+  def level_order(node = root)
+    queue = [node]
+    answer = []
+    while queue.length.positive?
+      queue.push(queue[0].left) unless queue[0].left.nil? || queue[0].nil?
+      queue.push(queue[0].right) unless queue[0].right.nil? || queue[0].nil?
+      if block_given?
+        answer.push(queue[0].value) if yield(node)
+      else
+        answer.push(queue[0].value)
+      end
+      queue.shift
+    end
+    answer
+  end
 end

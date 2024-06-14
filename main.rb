@@ -7,4 +7,4 @@ puts a.root
 puts a.root.value
 puts a.root.left.value
 puts a.root.right.value
-puts a.find(325)
+puts a.level_order
