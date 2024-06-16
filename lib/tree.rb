@@ -124,4 +124,8 @@ class Tree
     height(node.right, count)
     puts "The height of this node is #{height_score}"
   end
+
+  def depth(node1, node2 = root, count = 0)
+    height(node2, count) - height(node1, count)
+  end
 end
