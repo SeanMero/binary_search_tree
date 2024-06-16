@@ -140,4 +140,10 @@ class Tree
     end
     collector.max - collector.min > 1 ? return false : return true
   end
+
+  def rebalance!
+    arr = []
+    arr.push(inorder)
+    root = build_tree(arr)
+  end
 end
