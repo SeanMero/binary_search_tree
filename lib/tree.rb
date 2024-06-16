@@ -122,10 +122,22 @@ class Tree
 
     height(node.left, count)
     height(node.right, count)
-    puts "The height of this node is #{height_score}"
+    height_score
   end
 
   def depth(node1, node2 = root, count = 0)
     height(node2, count) - height(node1, count)
+  end
+
+  def balanced?(node = root, collector = [])
+    return if node.nil?
+
+    if node.left.nil && node.right.nil?
+      collector.push(depth(node))
+    else
+      balanced?(node.left, collector)
+      balanced?(node.right, collector)
+    end
+    collector.max - collector.min > 1 ? return false : return true
   end
 end
