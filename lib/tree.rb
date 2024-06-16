@@ -114,4 +114,14 @@ class Tree
       puts node.value
     end
   end
+
+  def height(node = root, count = 0)
+    count += 1
+    height_score = count if count > height_score
+    return if node.nil?
+
+    height(node.left, count)
+    height(node.right, count)
+    puts "The height of this node is #{height_score}"
+  end
 end
