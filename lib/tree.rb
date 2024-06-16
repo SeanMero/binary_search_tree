@@ -77,16 +77,41 @@ class Tree
       queue.shift
     end
     answer
+  end
 
-    def preorder(node = root)
-      return if node.nil?
-      if block_given?
-        puts node.value if yield(node)
-      else
-        puts node.value
-      end
-      preorder(node.left)
-      preorder(node.right)
+  def preorder(node = root)
+    return if node.nil?
+
+    if block_given?
+      puts node.value if yield(node)
+    else
+      puts node.value
+    end
+    preorder(node.left)
+    preorder(node.right)
+  end
+
+  def inorder(node = root)
+    return if node.nil?
+
+    inorder(node.left)
+    if block_given?
+      puts node.value if yield(node)
+    else
+      puts node.value
+    end
+    inorder(node.right)
+  end
+
+  def postorder(node = root)
+    return if node.nil?
+
+    postorder(node.left)
+    postorder(node.right)
+    if block_given?
+      puts node.value if yield(node)
+    else
+      puts node.value
     end
   end
 end
